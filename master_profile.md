@@ -7,7 +7,7 @@
 - **Location:** Budapest, Hungary
 - **LinkedIn:** linkedin.com/in/cherepanyas
 - **GitHub:** github.com/skycherepanya
-- **Work Authorization:** Eligible to work in Hungary / EU (Temporary Protection & Spouse of HU citizen)
+- **Work Authorization:** Eligible to work in Hungary / EU (Spouse of HU citizen, long-term resident)
 
 ## 2. Professional Summary
 Highly adaptable professional and aspiring Software Engineer with a unique blend of premium customer service, technical troubleshooting, and modern software development skills. Over 3 years of experience in customer-facing roles, including 2 years in the US market at Mercedes-Benz handling complex digital product onboarding. Currently pursuing a Master's degree in Computer Science (Software Engineering & AI). Actively building and deploying web applications, Telegram bots, and automated scripts using Python, JavaScript, TypeScript, and React. Adept at leveraging modern AI tools (Cursor, Gemini API) for vibe-coding, rapid prototyping, and workflow automation.
