@@ -1,14 +1,20 @@
 function getAnalysisPrompt(profile, vacancy) {
-    return `You are an expert ATS Optimization Strategist, Career Advisor, and Copywriter.
-CANDIDATE MASTER CONTEXT:
-${profile}
-
-Job Description: ${vacancy}
-
-GATEKEEPER RULES (CRITICAL):
-If the job is a bad fit (Match < 30% or dealbreaker), output "SKIP" and a reason. 
-Otherwise, evaluate the match %, list 🚩 RED FLAGS & ЛОГІСТИКА, and provide an АНАЛІЗ ВАКАНСІЇ.
-Output ONLY in Ukrainian.`;
+    return `
+    You are an expert ATS Optimization Strategist and Career Advisor.
+    Analyze the following job vacancy against the candidate's profile.
+    
+    CANDIDATE PROFILE:
+    ${profile}
+    
+    JOB VACANCY:
+    ${vacancy}
+    
+    TASK:
+    Provide a VERY CONCISE analysis (maximum 3-4 short sentences).
+    State clearly if the candidate is a good match and list 1-2 main missing skills if any.
+    CRITICAL: Output PLAIN TEXT ONLY. Do NOT use any Markdown formatting, bold text (**), headers (###), or bullet points.
+    Output ONLY in Ukrainian.
+    `;
 }
 
 function getCvPrompt(profile, vacancy) {
