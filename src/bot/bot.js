@@ -1,5 +1,6 @@
 const { Bot } = require('grammy');
 const { handleVacancyMessage } = require('./handlers/message');
+const { handleCallbackQuery } = require('./handlers/callback');
 
 function createBot() {
     if (!process.env.TELEGRAM_TOKEN) {
@@ -13,6 +14,7 @@ function createBot() {
     });
 
     bot.on('message:text', handleVacancyMessage);
+    bot.on('callback_query:data', handleCallbackQuery);
 
     return bot;
 }
