@@ -1,17 +1,21 @@
 const { generateContent } = require('../../ai/client');
 const { getCvPrompt, getCoverLetterPrompt } = require('../../ai/prompts');
 const { readMasterProfile } = require('../../utils/fileSystem');
+const { InputFile } = require('grammy');
+const { mdToPdf } = require('md-to-pdf');
 
 async function handleCallbackQuery(ctx) {
     const data = ctx.callbackQuery.data;
     const actionMap = {
         'generate_cv': {
             promptFn: getCvPrompt,
-            msg: 'Генерую CV... 📝'
+            msg: 'Генерую CV... 📝',
+            filename: 'CV.pdf'
         },
         'generate_cl': {
             promptFn: getCoverLetterPrompt,
-            msg: 'Генерую Cover Letter... ✉️'
+            msg: 'Генерую Cover Letter... ✉️',
+            filename: 'CoverLetter.pdf'
         }
     };
 
@@ -31,10 +35,18 @@ async function handleCallbackQuery(ctx) {
     try {
         const prompt = actionMap[data].promptFn(profile, vacancyText);
         const result = await generateContent(prompt);
-        await ctx.api.editMessageText(ctx.chat.id, waitMsg.message_id, result);
+        
+        // Convert markdown to PDF
+        const pdf = await mdToPdf({ content: result });
+        
+        // Send the PDF document
+        await ctx.replyWithDocument(new InputFile(pdf.content, actionMap[data].filename));
+        
+        // Remove the wait message
+        await ctx.api.deleteMessage(ctx.chat.id, waitMsg.message_id);
     } catch (err) {
         console.error('Generation error:', err);
-        await ctx.api.editMessageText(ctx.chat.id, waitMsg.message_id, '❌ Помилка генерації.');
+        await ctx.api.editMessageText(ctx.chat.id, waitMsg.message_id, '❌ Помилка генерації або створення PDF.');
     }
 }
 

@@ -30,7 +30,11 @@ test('handleCallbackQuery handles generation', async () => {
         session: { vacancy: 'Test Vacancy' },
         answerCallbackQuery: async () => {},
         reply: async () => ({ message_id: 123 }),
-        api: { editMessageText: async () => {} },
+        replyWithDocument: async () => {},
+        api: { 
+            editMessageText: async () => {},
+            deleteMessage: async () => {}
+        },
         chat: { id: 1 }
     };
     assert.strictEqual(typeof handleCallbackQuery, 'function');
