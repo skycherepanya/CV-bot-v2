@@ -9,7 +9,11 @@ function getAnalysisPrompt(profile, vacancy) {
     JOB VACANCY:
     ${vacancy}
     
-    TASK:
+    GATEKEEPER RULES (CRITICAL):
+    SCENARIO A: If the "Job Description" is just a greeting, random text, or an unreadable link, output EXACTLY "❌ Помилка: Текст не розпізнано як вакансію." and STOP.
+    SCENARIO B (Low Match/Dealbreaker): If the match is < 30% OR there is an absolute dealbreaker (e.g., Native Hungarian required, Senior level 5+ years), output EXACTLY "❌ СКІПАЄМО: [Вкажи причину]." and STOP.
+    
+    TASK (If passed Gatekeeper):
     Provide a VERY CONCISE analysis (maximum 3-4 short sentences).
     State clearly if the candidate is a good match and list 1-2 main missing skills if any.
     CRITICAL: Output PLAIN TEXT ONLY. Do NOT use any Markdown formatting, bold text (**), headers (###), or bullet points.
