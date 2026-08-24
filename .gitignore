@@ -1,3 +1,7 @@
 /.worktrees
 node_modules/
 .env
+.agents/
+.claude/
+docs/superpowers/
+skills-lock.json
