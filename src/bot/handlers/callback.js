@@ -19,14 +19,11 @@ async function handleCallbackQuery(ctx) {
 
     await ctx.answerCallbackQuery();
     
-    // Attempt to get the original vacancy from the message we replied to
-    // If we can't extract it, we'll notify the user.
-    // In Telegram, ctx.callbackQuery.message is the bot's own message with buttons.
-    // The vacancy is ideally stored in a session, but for MVP we might not have sessions.
-    // Let's assume we can get it from the session later, but for now we just use a placeholder text 
-    // or tell the user to send the vacancy again if session is not used.
-    
-    const vacancyText = "Job Vacancy Text (Note: session state needed for real vacancy)";
+    const vacancyText = ctx.session.vacancy;
+    if (!vacancyText) {
+        await ctx.reply('Текст вакансії не знайдено. Будь ласка, надішли вакансію ще раз.');
+        return;
+    }
     const profile = readMasterProfile();
     
     const waitMsg = await ctx.reply(actionMap[data].msg);

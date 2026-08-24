@@ -4,6 +4,7 @@ const { analyzeVacancy } = require('../../core/engine');
 async function handleVacancyMessage(ctx) {
     if (!ctx.message.text) return;
     const vacancyText = ctx.message.text;
+    ctx.session.vacancy = vacancyText;
 
     const waitMsg = await ctx.reply('Аналізую вакансію... Зачекай хвилинку ⏳');
 
