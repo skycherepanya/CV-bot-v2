@@ -1,4 +1,5 @@
 const { Bot } = require('grammy');
+const { handleVacancyMessage } = require('./handlers/message');
 
 function createBot() {
     if (!process.env.TELEGRAM_TOKEN) {
@@ -10,6 +11,8 @@ function createBot() {
     bot.command('start', (ctx) => {
         ctx.reply('Привіт! Надішли мені текст вакансії, і я зроблю аналіз, чи підходить вона під мій профіль.');
     });
+
+    bot.on('message:text', handleVacancyMessage);
 
     return bot;
 }
