@@ -37,7 +37,10 @@ async function handleCallbackQuery(ctx) {
         const result = await generateContent(prompt);
         
         // Convert markdown to PDF
-        const pdf = await mdToPdf({ content: result });
+        const pdf = await mdToPdf(
+            { content: result },
+            { launch_options: { args: ['--no-sandbox', '--disable-setuid-sandbox'] } }
+        );
         
         // Send the PDF document
         await ctx.replyWithDocument(new InputFile(pdf.content, actionMap[data].filename));
@@ -46,7 +49,7 @@ async function handleCallbackQuery(ctx) {
         await ctx.api.deleteMessage(ctx.chat.id, waitMsg.message_id);
     } catch (err) {
         console.error('Generation error:', err);
-        await ctx.api.editMessageText(ctx.chat.id, waitMsg.message_id, '❌ Помилка генерації або створення PDF.');
+        await ctx.api.editMessageText(ctx.chat.id, waitMsg.message_id, '❌ Помилка генерації або створення PDF. Деталі: ' + err.message);
     }
 }
 

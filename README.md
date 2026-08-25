@@ -57,3 +57,21 @@ npm test
 - **Змінити стиль Cover Letter**: Редагуйте файл `src/ai/prompts.js` (функція `getCoverLetterPrompt`).
 - **Оновити свої навички**: Просто оновіть файл `master_profile.md`, ніяких змін у коді робити не потрібно.
 - **Додати нові кнопки або функціонал**: Додайте нову логіку у `src/bot/handlers/callback.js` та оновіть клавіатуру у `src/bot/handlers/message.js`.
+
+## 🌍 Деплой та Оновлення на Oracle Server (Для AI Агентів)
+
+Бот працює 24/7 на Oracle VPS за допомогою `pm2`.
+У користувача налаштований SSH-аліас `oracle`.
+
+**🤖 Інструкція для AI Агента (Як оновити бота після змін у коді):**
+Кожного разу, коли ви (AI агент) вносите зміни в код бота, виконайте наступні кроки для деплою:
+1. Запуште зміни в GitHub (`git add . && git commit -m "..." && git push origin main`).
+2. Скопіюйте оновлені файли на сервер через `rsync` (це найшвидший спосіб оновити код без вирішення конфліктів git на сервері):
+   ```bash
+   rsync -avz --exclude 'node_modules' --exclude '.git' ./ oracle:~/cv-bot
+   ```
+3. Перезапустіть бота на сервері через PM2:
+   ```bash
+   ssh -o BatchMode=yes oracle 'export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" && pm2 restart cv-bot'
+   ```
+*(Примітка: для генерації PDF через `md-to-pdf`/`puppeteer` обов'язково використовувати `--no-sandbox`, інакше на сервері він впаде з помилкою прав).*
