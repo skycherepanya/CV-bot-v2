@@ -102,7 +102,7 @@ experience:
   - company: "Matild Palace, a Luxury Collection Hotel"
     location: "Budapest, Hungary"
     role: "In-Room Dining (Hospitality Professional)"
-    dates: "04/2024 – Present" # Fixed date inconsistency from 2026 to 2024
+    dates: "04/2026 – Present"
     level: "Customer Service"
     achievements:
       - action: "Delivered premium, 5-star customer service"
