@@ -28,13 +28,8 @@ async function generateContent(prompt, isJson = false) {
         } catch (error) {
             console.error(`Error with model ${modelName}:`, error.message);
             lastError = error;
-            // If it's a rate limit or exhausted quota error, try the next model
-            if (error.message.includes('429') || error.message.includes('exhausted') || error.message.includes('quota')) {
-                console.log(`Switching to next model...`);
-                continue;
-            }
-            // If it's another type of error (e.g. auth), break out
-            throw error;
+            console.log(`Switching to next model...`);
+            continue;
         }
     }
     
