@@ -2,10 +2,46 @@ const { InlineKeyboard } = require('grammy');
 const { analyzeVacancy } = require('../../core/engine');
 const { scrapeUrl } = require('../../utils/scraper');
 
+const messageBuffers = new Map();
+const BUFFER_TIMEOUT_MS = 1000; // 1 second debounce
+
 async function handleVacancyMessage(ctx) {
     if (!ctx.message.text) return;
     
-    let vacancyText = ctx.message.text.trim();
+    const chatId = ctx.chat.id;
+    const incomingText = ctx.message.text.trim();
+
+    if (!messageBuffers.has(chatId)) {
+        messageBuffers.set(chatId, {
+            texts: [],
+            timer: null,
+            context: null
+        });
+    }
+
+    const buffer = messageBuffers.get(chatId);
+    buffer.texts.push(incomingText);
+    buffer.context = ctx; // save the latest context
+
+    if (buffer.timer) {
+        clearTimeout(buffer.timer);
+    }
+
+    buffer.timer = setTimeout(() => {
+        processBufferedVacancy(chatId);
+    }, BUFFER_TIMEOUT_MS);
+}
+
+async function processBufferedVacancy(chatId) {
+    const buffer = messageBuffers.get(chatId);
+    if (!buffer) return;
+
+    messageBuffers.delete(chatId);
+
+    const ctx = buffer.context;
+    let vacancyText = buffer.texts.join('\n\n').trim();
+    if (!vacancyText) return;
+
     let waitMsg;
 
     // Check if the message is a URL
@@ -27,8 +63,9 @@ async function handleVacancyMessage(ctx) {
     } else {
         waitMsg = await ctx.reply('Аналізую вакансію... Зачекай хвилинку ⏳');
     }
-    if (ctx.message.text.trim().startsWith('http://') || ctx.message.text.trim().startsWith('https://')) {
-        ctx.session.vacancyLink = ctx.message.text.trim();
+    
+    if (buffer.texts.length === 1 && (vacancyText.startsWith('http://') || vacancyText.startsWith('https://'))) {
+        ctx.session.vacancyLink = vacancyText;
     } else {
         ctx.session.vacancyLink = '';
     }
