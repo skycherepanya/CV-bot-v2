@@ -40,8 +40,11 @@ sudo journalctl -u rclone-gdrive.service -f
 * Бот передає лінки в Telegram (користувачу) у текстовому повідомленні з кнопкою "Подався ✅".
 * Бот пише в Sheets (модуль `src/google/sheets.js`).
 * **Оновлення коду на Oracle:** `rsync` з виключенням `node_modules`, після чого `ssh ... pm2 restart cv-bot`.
+* **AI Архітектура:** Використовується двоетапна генерація CV (Chain-of-Thought): 1) JSON Планування (визначення Job Family, фільтрація скілів), 2) Маркдаун генерація.
+* **Single Source of Truth:** Переведено з Markdown на структурований `master_profile.yaml` з Evidence Layer.
 
 ## 5. Останні зміни та Рефакторинг
+* **AI:** Впроваджено 2-етапну генерацію CV та **динамічний fallback моделей** (`gemini-3.6-flash`, `3.7-flash` тощо) для уникнення лімітів 429.
 * Створено інтеграцію з Google Sheets (`src/google/sheets.js`) та Google Drive (`src/google/drive.js`).
 * Оновлено обробники повідомлень та кнопок (`src/bot/handlers/message.js`, `src/bot/handlers/callback.js`) для роботи з новими модулями Google.
 * **Безпека:** Додано `client_secret.json`, `token.json` та `.DS_Store` в `.gitignore` щоб уникнути витоку конфіденційних даних у публічний репозиторій.
