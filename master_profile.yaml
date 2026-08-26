@@ -1,0 +1,132 @@
+personal_info:
+  name: "Oleksandr Cherepania"
+  email: "skycherepanya@gmail.com"
+  phone: "+36 20 272 7508"
+  location: "Budapest, Hungary"
+  linkedin: "linkedin.com/in/cherepanyas"
+  github: "github.com/skycherepanya"
+  work_authorization: "Eligible to work in Hungary / EU (Spouse of HU citizen, long-term resident)"
+
+professional_summary:
+  base_narrative: "Highly adaptable professional and aspiring Software Engineer with a unique blend of premium customer service, technical troubleshooting, and modern software development skills. Over 3 years of experience in customer-facing roles, including 2 years in the US market at Mercedes-Benz handling complex digital product onboarding. Currently pursuing a Master's degree in Computer Science (Software Engineering & AI). Actively building and deploying web applications, Telegram bots, and automated scripts using Python, JavaScript, TypeScript, and React. Adept at leveraging modern AI tools (Cursor, Gemini API) for vibe-coding, rapid prototyping, and workflow automation."
+
+skills:
+  # IT & Software Engineering
+  - name: "JavaScript / TypeScript"
+    level: "Intermediate"
+    category: "Programming"
+    evidence: ["Adaptive-CV-Engine", "Vici Web App", "Dynamic Web App & Gallery"]
+  - name: "Python"
+    level: "Intermediate"
+    category: "Programming"
+    evidence: ["AI Calorie Tracking Bot", "CV-Agent Bot (V1)", "Personal Contact Assistant"]
+  - name: "React"
+    level: "Intermediate"
+    category: "Frameworks"
+    evidence: ["Hotel Amenities App", "Vici Web App"]
+  - name: "SQL"
+    level: "Basic"
+    category: "Database"
+    evidence: ["Supabase integration in AI Calorie Tracking Bot"]
+  - name: "Git / GitHub"
+    level: "Intermediate"
+    category: "Tools"
+    evidence: ["Used for version control across all personal projects"]
+  
+  # Technical Support & Operations
+  - name: "Technical Troubleshooting"
+    level: "L1" # Strict L1 limitation, no L2 escalation logic
+    category: "Support"
+    evidence: ["Apple ID lockouts", "iCloud synchronization", "Bluetooth / CarPlay in Mercedes", "Hardware diagnostics"]
+  - name: "Systems Administration"
+    level: "Basic"
+    category: "Support"
+    evidence: ["macOS", "iOS", "Windows", "Office 365 setup"]
+  - name: "Ticketing / CRM"
+    level: "Basic"
+    category: "Enterprise Tools"
+    evidence: ["ServiceNow basics", "Zendesk", "Momentum CRM", "NetStar"]
+
+projects:
+  - name: "Adaptive-CV-Engine"
+    type: "AI & Bot"
+    tech_stack: ["JavaScript", "TypeScript", "Node.js", "GrammY", "Gemini API"]
+    description: "A Telegram bot that acts as an AI CV tailor. Parses job descriptions and generates highly customized ATS-friendly Markdown and PDF resumes from a single source of truth."
+    relevance_tags: ["Software Engineering", "AI", "JavaScript", "Automation"]
+  - name: "Hotel Amenities App"
+    type: "Web Development"
+    tech_stack: ["React", "JavaScript", "CSS"]
+    description: "An internal web application built to digitize and simplify workflow processes at current hospitality workplace, replacing paper-based systems."
+    relevance_tags: ["Frontend", "React", "Web Development", "Internal Tools"]
+  - name: "AI Calorie Tracking Bot"
+    type: "AI & Bot"
+    tech_stack: ["Python", "Supabase", "Gemini API"]
+    description: "A Telegram bot that parses food photos using the Gemini API and logs nutritional data into a Supabase database."
+    relevance_tags: ["Python", "AI", "Database", "Automation"]
+  - name: "Notion Auto-Dictionary"
+    type: "Automation"
+    tech_stack: ["Python", "DeepL API", "Notion API"]
+    description: "A productivity automation script that integrates the DeepL API to automatically translate words and manage vocabulary directly within Notion."
+    relevance_tags: ["Python", "API Integration", "Automation"]
+
+experience:
+  - company: "Mercedes-Benz of Princeton"
+    location: "Lawrenceville, NJ, USA"
+    role: "Product Concierge / Technical Support Specialist"
+    dates: "02/2024 – 10/2025"
+    level: "L1 Support / Customer Facing"
+    achievements:
+      - action: "Managed the end-to-end digital onboarding"
+        context: "for 40+ high-net-worth clients monthly"
+        result: "ensured successful adoption of MBUX and EQ/EV ecosystems"
+      - action: "Resolved technical issues"
+        context: "related to Bluetooth, CarPlay, and Mercedes Me software"
+        result: "improved client satisfaction and reduced return visits"
+      - action: "Maintained CRM data"
+        context: "using Momentum CRM and NetStar daily"
+        result: "ensured accurate records for sales and service departments"
+
+  - company: "Jabko (Apple Reseller)"
+    location: "Uzhhorod, Ukraine"
+    role: "Technical Sales Consultant / Support Specialist"
+    dates: "12/2022 – 09/2023"
+    level: "L1 Support"
+    achievements:
+      - action: "Provided daily L1 technical support and diagnostics"
+        context: "for Apple products (iPhone, MacBook, iPad, iOS, macOS)"
+        result: "resolving hardware and software inquiries efficiently"
+      - action: "Resolved account access issues"
+        context: "including Apple ID lockouts and iCloud synchronization errors"
+        result: "preventing data loss and migration failures for end-users"
+
+  - company: "Matild Palace, a Luxury Collection Hotel"
+    location: "Budapest, Hungary"
+    role: "In-Room Dining (Hospitality Professional)"
+    dates: "04/2024 – Present" # Fixed date inconsistency from 2026 to 2024
+    level: "Customer Service"
+    achievements:
+      - action: "Delivered premium, 5-star customer service"
+        context: "in a high-volume hospitality environment"
+        result: "maintaining strict luxury brand standards"
+      - action: "Implemented an internal React-based application"
+        context: "to optimize staff workflows"
+        result: "reducing paper usage and streamlining operations"
+
+education:
+  - institution: "Neoversity. IT University"
+    location: "Remote"
+    degree: "Master of Science in Computer Science (Software Engineering and AI)"
+    dates: "09/2025 – 05/2027"
+  
+  - institution: "Uzhhorod National University"
+    location: "Uzhhorod, Ukraine"
+    degree: "Bachelor's Degree in Geodesy and Land Management"
+    dates: "09/2019 – 05/2023"
+
+certifications:
+  - name: "100 Days of SwiftUI"
+    dates: "04/2025 – Present"
+    details: "Comprehensive iOS development training."
+  - name: "Mercedes-Benz Academy Certified"
+    dates: "2024"
+    details: "Technical training on EQ/EV ecosystems and digital services."

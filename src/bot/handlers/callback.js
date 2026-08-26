@@ -1,5 +1,5 @@
 const { generateContent } = require('../../ai/client');
-const { getCvPrompt, getCoverLetterPrompt } = require('../../ai/prompts');
+const { getCvPlannerPrompt, getCvGeneratorPrompt, getCoverLetterPrompt } = require('../../ai/prompts');
 const { readMasterProfile } = require('../../utils/fileSystem');
 const { mdToPdf } = require('md-to-pdf');
 const { InlineKeyboard } = require('grammy');
@@ -35,18 +35,7 @@ async function handleCallbackQuery(ctx) {
         return;
     }
 
-    const actionMap = {
-        'generate_cv': {
-            promptFn: getCvPrompt,
-            msg: 'Генерую CV та зберігаю на Google Drive... 📝'
-        },
-        'generate_cl': {
-            promptFn: getCoverLetterPrompt,
-            msg: 'Генерую Cover Letter та зберігаю на Google Drive... ✉️'
-        }
-    };
-
-    if (!actionMap[data]) return;
+    if (data !== 'generate_cv' && data !== 'generate_cl') return;
 
     await ctx.answerCallbackQuery();
     
@@ -57,11 +46,29 @@ async function handleCallbackQuery(ctx) {
     }
     const profile = readMasterProfile();
     
-    const waitMsg = await ctx.reply(actionMap[data].msg);
+    const msgText = data === 'generate_cv' 
+        ? 'Генерую CV (1/2: Планування) та зберігаю на Google Drive... 📝' 
+        : 'Генерую Cover Letter та зберігаю на Google Drive... ✉️';
+    const waitMsg = await ctx.reply(msgText);
     
     try {
-        const prompt = actionMap[data].promptFn(profile, vacancyText);
-        const result = await generateContent(prompt);
+        let result = '';
+        if (data === 'generate_cv') {
+            // Step 1: Planner
+            const plannerPrompt = getCvPlannerPrompt(profile, vacancyText);
+            const planJson = await generateContent(plannerPrompt, true);
+            
+            await ctx.api.editMessageText(ctx.chat.id, waitMsg.message_id, 'Генерую CV (2/2: Верстка) та зберігаю на Google Drive... 📝');
+            
+            // Step 2: Generator
+            const generatorPrompt = getCvGeneratorPrompt(profile, planJson);
+            result = await generateContent(generatorPrompt, false);
+            // Clean up markdown block if the model included it
+            result = result.replace(/^```markdown\n/, '').replace(/```$/, '');
+        } else {
+            const clPrompt = getCoverLetterPrompt(profile, vacancyText);
+            result = await generateContent(clPrompt, false);
+        }
         
         // Extract company and last name for filename
         const namePrompt = `Extract the company name from the vacancy and the candidate's last name from the profile. 
@@ -73,12 +80,12 @@ Vacancy text (start):
 ${vacancyText.substring(0, 1000)}
 
 Profile text (start):
-${profile.substring(0, 500)}`;
+${JSON.stringify(profile).substring(0, 500)}`;
 
         let filePrefix = 'Company_Applicant';
         let companyName = 'Company';
         try {
-            const prefixRaw = await generateContent(namePrompt);
+            const prefixRaw = await generateContent(namePrompt, false);
             const cleaned = prefixRaw.trim().replace(/[^a-zA-Z0-9_]/g, '');
             if (cleaned.length > 0) {
                 filePrefix = cleaned;

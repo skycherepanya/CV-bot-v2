@@ -1,12 +1,14 @@
 const fs = require('fs');
 const path = require('path');
+const yaml = require('js-yaml');
 
 function readMasterProfile() {
-    const profilePath = path.join(process.cwd(), 'master_profile.md');
+    const profilePath = path.join(process.cwd(), 'master_profile.yaml');
     if (!fs.existsSync(profilePath)) {
-        throw new Error('master_profile.md not found');
+        throw new Error('master_profile.yaml not found');
     }
-    return fs.readFileSync(profilePath, 'utf8');
+    const fileContents = fs.readFileSync(profilePath, 'utf8');
+    return yaml.load(fileContents);
 }
 
 module.exports = { readMasterProfile };
