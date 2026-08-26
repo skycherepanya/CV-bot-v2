@@ -66,7 +66,7 @@ Highly adaptable professional and aspiring Software Engineer with a unique blend
 
 ### Matild Palace, a Luxury Collection Hotel | Budapest, Hungary
 **Role:** In-Room Dining (Hospitality Professional)
-**Dates:** 04/2024 – Present
+**Dates:** 04/2026 – Present
 **Achievements & Responsibilities:**
 - Deliver premium, 5-star customer service and hospitality with extreme attention to detail.
 - Developed strong multitasking skills and the ability to remain calm under pressure in high-volume environments.
