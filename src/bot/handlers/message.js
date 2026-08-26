@@ -27,9 +27,13 @@ async function handleVacancyMessage(ctx) {
     } else {
         waitMsg = await ctx.reply('Аналізую вакансію... Зачекай хвилинку ⏳');
     }
-
+    if (ctx.message.text.trim().startsWith('http://') || ctx.message.text.trim().startsWith('https://')) {
+        ctx.session.vacancyLink = ctx.message.text.trim();
+    } else {
+        ctx.session.vacancyLink = '';
+    }
+    
     ctx.session.vacancy = vacancyText;
-
     try {
         const analysisResult = await analyzeVacancy(vacancyText);
 
