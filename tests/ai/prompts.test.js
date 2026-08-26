@@ -1,6 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert');
-const { getAnalysisPrompt, getCvPrompt, getCoverLetterPrompt } = require('../../src/ai/prompts');
+const { getAnalysisPrompt, getCvPlannerPrompt, getCvGeneratorPrompt, getCoverLetterPrompt } = require('../../src/ai/prompts');
 
 test('getAnalysisPrompt should return formatted prompt', () => {
     const prompt = getAnalysisPrompt('My Profile', 'Job Vacancy');
@@ -9,11 +9,18 @@ test('getAnalysisPrompt should return formatted prompt', () => {
     assert.ok(prompt.includes('PLAIN TEXT ONLY'));
 });
 
-test('getCvPrompt should return formatted prompt', () => {
-    const prompt = getCvPrompt('Profile X', 'Job Y');
+test('getCvPlannerPrompt should return formatted prompt', () => {
+    const prompt = getCvPlannerPrompt('Profile X', 'Job Y');
     assert.ok(prompt.includes('Profile X'));
     assert.ok(prompt.includes('Job Y'));
-    assert.ok(prompt.includes('CRITICAL'));
+    assert.ok(prompt.includes('JSON SCHEMA'));
+});
+
+test('getCvGeneratorPrompt should return formatted prompt', () => {
+    const prompt = getCvGeneratorPrompt('Profile X', 'Plan Y');
+    assert.ok(prompt.includes('Profile X'));
+    assert.ok(prompt.includes('Plan Y'));
+    assert.ok(prompt.includes('Markdown'));
 });
 
 test('getCoverLetterPrompt should return formatted prompt', () => {
